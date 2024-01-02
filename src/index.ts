@@ -1,8 +1,8 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import mongoose from "mongoose";
-
+import urlRouter from "../routes/url.route";
+import { connect } from "./configs/db.config";
 
 dotenv.config();
 
@@ -16,14 +16,13 @@ app.use(express.json());
 
 app.use(express.urlencoded({extended: true}));
 
+app.use("/url", urlRouter);
+
 app.get('/',async (req:Request, res:Response) =>{
     res.send(`API running successfully since ${new Date()}`);
 })
 
-app.get('/temp',async (req:Request, res:Response) =>{
-    res.send(`Hello Let's Dive deep into the project`);
-})
-
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`)
+    console.log(`Server running at http://localhost:${port}`);
+    connect();
 })
