@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 interface UrlDto extends mongoose.Document {
     originalUrl: string;
-    shortUrl: string;
+    urlId: string;
     date: Date;
     clicks: number;
 }

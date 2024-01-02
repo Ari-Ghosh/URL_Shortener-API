@@ -1,13 +1,14 @@
-import { nanoid } from "nanoid";
-import urlModel from "../models/url.model";
+import { fetchURLById } from "../../services/url.services";
 
-const generateUniqueID = async () => {
-    let uniqueID = nanoid(10);
-    let url = await urlModel.findOne({shortUrl: uniqueID});
-    while(url){
-        uniqueID = nanoid(10);
-        url = await urlModel.findOne({shortUrl: uniqueID});
-    }
+const generateRandomString = () => {
+    const randomString = Math.random().toString(36).substring(2, 7);
+    return randomString;
+}
+
+const generateUniqueID = async(): Promise<string> => {
+    const uniqueID = generateRandomString();
+    const urlDocument = await fetchURLById(uniqueID);
+    if(urlDocument) return generateUniqueID();
     return uniqueID;
 }
 

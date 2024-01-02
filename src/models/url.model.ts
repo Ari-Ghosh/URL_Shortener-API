@@ -1,5 +1,5 @@
 import UrlDto from "../dtos/url.dto";
-import mongoose,{ Model, Schema, model } from "mongoose";
+import { Model, Schema, model } from "mongoose";
 
 const urlSchema : Schema<UrlDto> = new Schema(
     {
@@ -7,7 +7,7 @@ const urlSchema : Schema<UrlDto> = new Schema(
             type: String, 
             required: true
         },
-        shortUrl: {
+        urlId: {
             type: String, 
             required: true, 
             unique: true
